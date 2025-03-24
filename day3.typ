@@ -37,12 +37,15 @@ trong đó:
 - $F$ là hàm tốc độ lan truyền của mặt biên
 
 $T$ là một hàm số trong không gian $RR^3$, dành cho mặt p
-Với một toạ độ $(x, y)$, T trả về thời gian mà mặt biên lan truyền đế
+Với một toạ độ $(x, y)$, T trả về thời gian mà mặt biên lan truyền đến toạ độ đã cho.
+
+// TODO Giải thích cho bằng được phương trình Eikonal 
 
 
 == Giải thuật
 Thuật toán này 
 
+// TODO Viết giải thuật
 
 
-
+ả
