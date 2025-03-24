@@ -213,7 +213,7 @@ Các phương thức truy cập sẽ kiểm tra xem nút được tham chiếu c
 
 = Chẩn đoán hỗ trợ bởi máy tính
 
-Chẩn đoán hỗ trợ bởi máy tính (CAD) là một lĩnh vực kết hợp giữa công nghệ thông tin và y học, nhằm cải thiện độ chính xác và hiệu quả trong việc chẩn đoán bệnh. Hệ thống CAD sử dụng các thuật toán xử lý và phân tích hình ảnh để hỗ trợ các bác sĩ trong việc đưa ra quyết định.
+Chẩn đoán hỗ trợ bởi máy tính (Computer Aided Diagnosis - CAD) là một lĩnh vực kết hợp giữa công nghệ thông tin và y học, nhằm cải thiện độ chính xác và hiệu quả trong việc chẩn đoán bệnh. Hệ thống CAD sử dụng các thuật toán xử lý và phân tích hình ảnh để hỗ trợ các bác sĩ trong việc đưa ra quyết định.
 
 == Quy trình hoạt động của CAD
 - Thu thập dữ liệu: Dữ liệu thường là hình ảnh y khoa (như X-quang, CT, MRI) được thu thập từ bệnh nhân.
@@ -243,7 +243,6 @@ CAD phải xử lý nhiều yếu tố đa dạng, bao gồm:
 
 2. Thống kê trong tập dữ liệu (Statistics in Dataset)
 - Số lượng bệnh nhân ít đối với bệnh nghiêm trọng: Những bệnh lý nghiêm trọng thường có số lượng bệnh nhân ít, làm hạn chế dữ liệu để huấn luyện mô hình.
-
 - Bệnh phức tạp: Các căn bệnh khó chẩn đoán thường là mục tiêu của CAD, đòi hỏi sự hỗ trợ cao hơn từ hệ thống.
 
 3. Tiền xử lý (Preprocessing)
@@ -256,15 +255,14 @@ CAD phải xử lý nhiều yếu tố đa dạng, bao gồm:
   - Dữ liệu tái tạo (rebuild datasets) thường chỉ có sẵn cho các bệnh phổ biến, gây khó khăn cho các bệnh hiếm.
 
 == Các thách thức cho CAD
+
 1. Thu thập dữ liệu và đánh giá chất lượng (Data Collection and Quality Assessment):
 
 - Dữ liệu y tế cần được chuẩn hóa và đảm bảo chất lượng cao để các hệ thống CAD hoạt động chính xác.
-
 - Việc quản lý dữ liệu từ nhiều nguồn khác nhau là một khó khăn lớn.
 
 2. Phát triển các thuật toán phân đoạn tiên tiến (Advanced Segmentation Approaches):
-
-- Phân đoạn hình ảnh là bước quan trọng trong CAD nhưng thường đòi hỏi các thuật toán mạnh mẽ hơn để xử lý các cấu trúc phức tạp.
+Phân đoạn hình ảnh là bước quan trọng trong CAD nhưng thường đòi hỏi các thuật toán mạnh mẽ hơn để xử lý các cấu trúc phức tạp.
 
 3. Trích xuất và chọn lọc đặc điểm (Advanced Feature Extraction / Selection):
 
@@ -287,10 +285,10 @@ CAD phải xử lý nhiều yếu tố đa dạng, bao gồm:
 - Hiện chưa có tiêu chuẩn cụ thể để đánh giá hiệu suất của các hệ thống CAD. Điều này cần được phát triển để đảm bảo tính minh bạch và độ tin cậy.
 
 == Quá trình bùng nổ AI và tác động đến CAD
+
 1. Kỷ nguyên đầu tiên của AI (1960):
 
 - AI thời kỳ này dựa trên phương pháp "Suy luận bằng tìm kiếm" (Inference by search).
-
 - Nghiên cứu CAD tự động chẩn đoán bắt đầu xuất hiện, đánh dấu bước khởi đầu cho công nghệ xử lý hình ảnh y tế.
 
 2. Kỷ nguyên thứ hai của AI (1980):
@@ -315,5 +313,4 @@ AI giúp CAD đạt hiệu suất cao hơn 10 triệu lần so với thời kỳ
 AI cho phép phân tích dữ liệu đa chiều, từ hình ảnh y tế đến hồ sơ bệnh lý và dữ liệu di truyền, tạo ra các giải pháp chẩn đoán chính xác và phù hợp với từng bệnh nhân.
 
 - Tự động hóa toàn diện:
-
 Với AI, CAD có thể tự động hóa hầu hết quy trình chẩn đoán, giảm áp lực cho các chuyên gia y tế.

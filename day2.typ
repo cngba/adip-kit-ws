@@ -1,10 +1,10 @@
-= Ngày 2  
+// = Ngày 2  
 
-== PHÒNG THÍ NGHIỆM CHĂM SÓC SỨC KHỎE KỸ THUẬT SỐ:  
+= Phòng thí nghiệm chăm sóc sức khỏe kỹ thuật số (Digital Healthcare Lab) 
 
 Mục tiêu: Phát triển các hệ thống kỹ thuật số để cải thiện sức khỏe và đời sống, nghiên cứu một số ứng dụng của từng chủ đề.  
 
-=== Thực tế ảo (VR) - Thực tế tăng cường (AR) trong chăm sóc sức khỏe  
+== Thực tế ảo (VR) - Thực tế tăng cường (AR) trong chăm sóc sức khỏe  
 
 Mọi người thường nghĩ rằng VR-AR chỉ được sử dụng trong trò chơi như:  
 - Nhập vai vào thế giới giả tưởng.  
@@ -43,7 +43,7 @@ Cơ hội:
 - Phát triển y tế từ xa: Việc kết hợp AR và VR vào y tế từ xa giúp thu hẹp khoảng cách tiếp cận dịch vụ y tế, đặc biệt ở những khu vực xa xôi hoặc thiếu thốn điều kiện y tế.  
 - Nghiên cứu sáng tạo: AR và VR mở ra những hướng nghiên cứu y học mới, giúp tăng tốc các thí nghiệm, khám phá thuốc và đột phá y khoa.  
 
-=== Ứng dụng Gamification trong trị liệu  
+== Ứng dụng Gamification trong trị liệu  
 
 Gamification là việc áp dụng các yếu tố trò chơi và kỹ thuật thiết kế game vào các lĩnh vực phi trò chơi nhằm thúc đẩy và tạo động lực cho người tham gia đạt được mục tiêu cụ thể.  
 
@@ -59,7 +59,7 @@ Một số hướng đi khác:
 - Dự án gamification dựa trên âm nhạc.  
 - Trị liệu thực tế ảo dựa trên IBT (Interpersonal Behavioral Therapy).  
 
-=== AI Dự đoán trong chăm sóc sức khỏe  
+== AI Dự đoán trong chăm sóc sức khỏe  
 
 - AI hội thoại trong y tế: Hiện tại chủ yếu chỉ dừng ở việc trả lời các câu hỏi y tế cơ bản.  
 - Ứng dụng thực tế ảo và avatar thông minh vào chăm sóc sức khỏe
