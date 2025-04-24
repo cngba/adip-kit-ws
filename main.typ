@@ -1,5 +1,6 @@
 #import "/iclr2025.typ": iclr2025
 
+
 // https://www.hurix.com/blogs/the-transformative-impact-of-ar-vr-in-healthcare/#:~:text=AR%20and%20VR%20technologies%20are,both%20patients%20and%20healthcare%20providers.
 
 #let author-note = footnote[
@@ -61,3 +62,4 @@
 
 #include "day1.typ"
 #include "day2.typ"
+#include "day3.typ"

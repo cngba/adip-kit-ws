@@ -16,7 +16,7 @@ Trong quá trình chụp CT, người bệnh được chỉ định nằm trên 
 == Lịch sử
 
  #figure(
-*   image("/images/ct-evolution.png", width: 80%),
+  image("/images/ct-evolution.png", width: 80%),
   caption: [
       Quá trình phát triển của máy chụp CT.
   ],
