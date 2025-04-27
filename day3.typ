@@ -1,18 +1,14 @@
 #import "@preview/algo:0.3.6": algo, i, d, comment, code
 
+#import "preamble.typ": *
+
+#context bib_state.get()
+
 = Fast Marching Algorithm
 
 Bài toán lan truyền mặt biên (_Interface Propagation_) là một bài toán gắn liền với thực tế. Trong đó, sóng nước hay những đám cháy đều có thể diễn giải được bằng bài toán lan truyền mặt biên. Trong đó, Narrow Band Level set và Fast Marching là những phương pháp thường được dùng để giải những bài toán này.
 
 Fast Marching algorithm (tạm dịch là Thuật toán Hành tiến nhanh) là một thuật toán tìm đường nhanh, được James A. Sethian sáng tạo vào những năm 1990. 
-
-// Đây là phương pháp số học để giải phương trình Eikonal phi tuyến bằng phương pháp xấp xỉ. Phương trình Eikonal có dạng:
-
-// $
-//   | nabla u(x) | = F(x) "in" Omega 
-// $
-// với $ F(x) > 0 $.
-
 
 == Phương trình Eikonal
 
@@ -36,7 +32,7 @@ $
 
 - $f(x, y)$ là hàm số tốc độ của mỗi điểm trong không gian. Nếu $f(x, y) = 1$, phương trình trở thành phương trình Eikonal chuẩn, dùng để tính khoảng cách từ 1 điểm nguồn.
 
-Phương trình Eikonal là một dạng tĩnh của phương trình Hamilton-Jacobi.
+Phương trình Eikonal là một dạng tĩnh của phương trình Hamilton-Jacobi. Phương trình Hamilton-Jacobi là một phương trình vi phân riêng rất quan trọng trong cơ học lý thuyết và toán lý. 
 
 Phương trình này mô phỏng việc một dòng chảy hoạt động trong một không gian 2 chiều hoặc 3 chiều hữu hạn.
 
@@ -49,7 +45,7 @@ Ngược lại, bây giờ hãy cho rằng dữ liệu biên được lấy từ
 Cách 1: tại mỗi điểm trên đường cong, ta đặt một "phân tử", và di chuyển chúng ra khỏi đường cong theo một hướng chuẩn, với tốc độ đơn vị. Tại bất kỳ thời điểm C nào, vị trí của tất cả phần tử này trả về tập hợp tất cả các điểm, có khoảng cách với đường cong ban đầu bằng C.
 
 Cách thứ 2 là vẽ lại tất cả các điểm, nhưng ở một khoảng cách nhất định so với đường gốc. Cách này áp dụng nguyên lý Huygens. 
-Nguyên lý Huygens là một phương pháp hình học để tìm mặt sóng của một sóng lan truyền tại một thời điểm sau, nếu biết mặt sóng tại một thời điểm trước đó. Kết quả của phần tìm mặt sóng này là một "wavefront", tức là một đường cong bất kỳ thể hiện tập hợp vị trí tất cả các điểm biên tại thời điểm $t$.
+Nguyên lý Huygens là một phương pháp hình học để tìm mặt sóng của một sóng lan truyền tại một thời điểm sau, nếu biết mặt sóng tại một thời điểm trước đó. Kết quả của phần tìm mặt sóng này là một "wavefront", tức là một đường cong bất kỳ thể hiện tập hợp vị trí tất cả các điểm biên tại thời điểm $t$. #cite(<sethian1998fastmarching>)
 
 Mặt ngoài (envelope) của đường sóng tạo thành một tập hợp cố định là những "điểm đến đầu tiên", tức là một đường sóng lan truyền tới đâu, thì điểm đó là cố định. Mặt ngoài của đường sóng khi được kết nối lại sẽ tạo thành một đường cong; và đường cong này không khả vi, cũng như ta không thể tính được gradient $nabla u$. Vì cần tìm khoảng cách ngắn nhất đến các điểm "envelope", ta chọn cách làm thứ 2.
 
@@ -139,3 +135,82 @@ Quá trình này sẽ được lặp lại.
 
 Thuật toán này hoạt động tốt, vì các điểm xung quanh sẽ không tồn tại giá trị nào thấp hơn nhưng điểm đã cho. Ta có thể hiểu quá trình này như một dòng nước đang chảy ở một vùng gồ ghề, trong đó, ở vùng kế cận với dòng nước, điểm nào có cao độ thấp hơn, nước sẽ chảy đến đó trước.
 
+Độ phức tạp của Fast Marching là $O(N log N)$, ứng dụng heap.
+Có nhiều cách để lưu trữ các điểm, nhưng trong trường hợp này, ta lưu trữ giá trị `Trial` theo 1 cấu trúc nhất định. Khi 1 điểm được chọn, các điểm liền kề được cập nhật, và giá trị $u$ của chúng có thể thay đổi.
+Vì vậy, một phần nhỏ trong số các điểm phải được sắp xếp lại để có được thứ tự các điểm như ý muốn. Điều này liên tưởng đến cấu trúc dữ liệu heap. Cụ thể, ta xây dựng min-heap, là một cây nhị phân đầy đủ, với tính chất là giá trị tại tất cả các nút phải bé hơn hoặc bằng giá trị của tất cả các nút con. Trong thực tế, ta xây dựng heap dưới dạng 1 mảng, với 1 nút tại index `k`, và các nút con ở index `2k` và `2k + 1`. Từ đây, ta rút ra rằng nút cha của bất kỳ nút nào nằm tại index `k / 2`, và phần tử nhỏ nhất nằm tại `k = 1` của mảng. Truy xuất nút con, nút cha chỉ là thao tác trên mảng với độ phức tạp $O(1)$.
+
+Ta gọi:
+- `UpHeap` (Vun đống từ dưới lên): Khi thêm một phần tử mới vào Heap, phần tử này sẽ được đẩy lên vị trí thích hợp để duy trì tính chất của Heap.
+- `DownHeap` (Vun đống từ trên xuống): Khi loại bỏ nút gốc, phần tử cuối cùng của Heap được đưa lên gốc và tiến hành điều chỉnh từ gốc xuống để duy trì tính chất của Heap. #cite(<rdsicUpheapDownheap>)
+
+Các giá trị của $u$ được lưu giữ cùng với các chỉ mục thể hiện vị trí trên không gian lưới. Thuật toán sẽ hoạt động như sau: Tìm phần tử nhỏ nhất trong `NarrowBand`. Gọi thao tác này là `FindSmallest`, nó xoá bỏ gốc của cây, rồi thực hiện `DownHeap` để thoả mãn cấu trúc heap được yêu cầu.
+Tìm các điểm tiếp theo có trạng thái "FarAway", có bao gồm loại trừ các điểm đã đi qua (`Alive`), đánh dấu các điểm đó, rồi thực hiện thao tác `Insert`, tức thêm điểm mới vào heap. Kích cỡ của heap được tăng 1, phần tử mới được đặt ở cuối heap, rồi thực hiện `UpHeap` để sắp xếp lại.
+
+Nếu có điểm nào trong heap phát hiện thay đổi giá trị $u$ thì thực hiện lại `UpHeap` để sắp xếp lại cho phù hợp.
+
+Heap là cây nhị phân đầy đủ, luôn đảm bảo cân bằng, nên `UpHeap` và `DownHeap` luôn có độ phức tạp là $O(log N)$. Ứng với N phần tử, độ phức tạp của cả quá trình tăng lên $O(N log N)$. Đối với `NarrowBand`, nếu có 1 con trỏ đến phần tử tương ứng từ cấu trúc lưới đến heap thì độ phức tạp có thể giảm xuống $O(1)$. Nếu không, trường hợp tệ nhất là độ phức tạp tăng lên $O(N)$. 
+
+Kết hợp lại, trên một lưới gồm $N$ điểm, độ phức tạp của Fast Marching là $O(N log N)$. Trên không gian ba chiều, mỗi chiều là M điểm, độ phức tạp của Fast Marching được giảm từ $O(N^4)$ xuống $O(N^3 log N)$. #cite(<alblas2018fastmarching>)
+
+
+== Ứng dụng trong Phân tách mạch máu
+
+Để thực hành Fast Marching để phân tách mạch máu, một bức ảnh mạch máu được sử dụng:
+
+#figure(
+  image("/images/blood-vessel.png", width: 80%),
+  caption: [
+      Mạch máu ban đầu
+  ],
+)
+
+Hàm tốc độ lan truyền được dựa vào màu sắc của điểm ảnh. Điểm ảnh càng tối thì tốc độ càng cao, có nghĩa là tốc độ lan truyền trên các mạch máu sẽ cao hơn tốc độ bên ngoài mạch máu. Hàm tốc độ là $F(i, j)$ có giá trị tối đa là $1$, giá trị tối thiểu là $0.1$, tạo thành minh hoạ như hình sau.
+
+#figure(
+  image("/images/blood-speed-func.png", width: 80%),
+  caption: [
+      Đồ thị hàm tốc độ 
+  ],
+)
+Ta có thể thấy rõ rằng những điểm thuộc về mạch máu có màu vàng hoặc xanh lục, ứng với tốc độ từ 0.6 trở lên, nghĩa là nó lan truyền đến rất nhanh. Ngược lại, các vùng còn lại mang màu xanh lục, nghĩa là tốc độ chậm.
+
+Khi đã có được hàm tốc độ, thuật toán Hành tiến nhanh được thực thi.
+
+#figure(
+  image("/images/fm-imple.png", width: 80%),
+  caption: [
+     Đường đi của thuật toán từ xuất phát điểm bên trái - trên cùng
+  ],
+)
+Từ bản đồ đường đi, có thể thấy thuật toán cơ bản đi dần đều từ phía trên cùng bên trái, đến phía dưới cùng bên phải. Tuy nhiên, các mạch máu vẫn mang màu xanh lục đậm, nghĩa là các mạch máu đã được thuật toán bao phủ nhanh chóng, trước khi bao phủ những vùng khác.
+
+Bằng bản đồ `T` đã có, ta có thể xác định con đường ngắn nhất từ điểm khởi đầu cho đến điểm kết thúc. Con đường này được tìm thấy bằng Gradient Descent trong không gian liên tục. Đương nhiên, do tốc độ bên trong mạch máu nhanh hơn các điểm còn lại, con đường ngắn nhất có đi trên mạch máu.
+
+#figure(
+  image("/images/shortest-path.png", width: 80%),
+  caption: [
+     Đường đi ngắn nhất thuật toán tìm được
+  ],
+)
+=== Thực nghiệm trên 3D Slicer
+
+#figure(
+  image("/images/aorta.png", width: 80%),
+  caption: [
+     Phân tích động mạch chủ trong ứng dụng 3D Slicer
+  ],
+)
+
+Các bước thực hiện trong ứng dụng như sau:
++ Chọn dataset mẫu, ở đây là `CTCardio`.
++ Chọn công cụ `Segment Editor` từ thanh tác vụ phía trên màn hình. 
++ Bật công cụ `Paint`, phía bên trái màn hình. Có thể chọn màu sắc nếu cần.
++ Lựa chọn độ sâu tương ứng của lát cắt cho đến khi nhìn thấy bộ phận tương ứng
++ Đánh dấu một số vị trí thuộc bộ phận động mạch chủ. Không có quy tắc nhất định trong việc đánh dấu. Càng nhiều dấu, động mạch chủ càng xuất hiện chính xác. 
+Có thể lặp lại bước 4 và 5 cho đến khi thấy hợp lý.
++ Bật công cụ `Fast Marching`
++ Không thay đổi thông số nào, bấm `Initialize`.
++ Khi đã hoàn thành, chỉnh `Segment Volume` về khoảng $1$-$2%$.
++ Chọn `Show 3D` để mô hình 3D xuất hiện.
+
+Fast Marching sẽ lấy gần hết tất cả chi tiết có trong mô hình. Tuy nhiên, ta chỉ cần trích xuất động mạch chủ, nghĩa là một thể tích rất nhỏ trong tổng thể tích của toàn bộ mô hình. Lựa chọn `Segment Volume` chỉ $1$-$2%$, tức là chỉ lấy dưới $2%$ thể tích tính từ điểm khởi đầu của thuật toán Fast Marching (ở đây là bên trong động mạch chủ đã chọn sẵn bằng Paint).

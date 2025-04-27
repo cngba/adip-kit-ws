@@ -31,7 +31,7 @@
 
  #let header-title = (
    [Under review as a conference paper at ICLR 2025],
-   [Workshop về Xử lý ảnh y khoa],  // accepted
+   [Báo cáo: Workshop Xử lý ảnh y khoa],  // accepted
 )
 
 #let author-anon = [*Anonymous authors*\ Paper under double-blind review]

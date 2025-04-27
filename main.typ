@@ -1,40 +1,7 @@
-#import "/iclr2025.typ": iclr2025
+#import "/preamble.typ": *
 
-
-// https://www.hurix.com/blogs/the-transformative-impact-of-ar-vr-in-healthcare/#:~:text=AR%20and%20VR%20technologies%20are,both%20patients%20and%20healthcare%20providers.
-
-#let author-note = footnote[
-  Use footnote for providing further information about author (webpage,
-  Alternative address) --- *not* for acknowledging funding agencies.  Funding
-  Acknowledgements go at the end of the paper.
-]
-
-
-#let authors = (
-  (
-    names: ([Nguyễn Huỳnh Hải Đăng], ),
-    affilation: [ MSSV: 22127052 ],
-    email: "nhhdang22@clc.fitus.edu.vn",
-  ),
-  (
-    names: ([Lưu Nam Đạt],),
-    affilation: [ MSSV: 22127062 ],
-    email: "lndat22@clc.fitus.edu.vn",
-  ),
-  (
-    names: ([Nguyễn Bá Công], ),
-    affilation: [ MSSV: 22127046 ],
-    email: "nbcong22@clc.fitus.edu.vn",
-  ),
-  (
-    names: ([Đặng Trần Anh Khoa], ),
-    affilation: [ MSSV: 22127024 ],
-    email: "dtakhoa22@clc.fitus.edu.vn",
-  ),
-
-)
 #show: iclr2025.with(
-  title: [Workshop Report],
+  title: [Báo cáo: Workshop Xử lý ảnh y khoa],
   authors: authors,
   keywords: (),
   abstract: [
@@ -46,6 +13,8 @@
   ],
   accepted: true,
 )
+
+#bib_state.update(none)
 
 #show outline.entry.where(
   level: 1
